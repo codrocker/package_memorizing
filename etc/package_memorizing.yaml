@@ -8,5 +8,15 @@ Log:
   Level: debug
 
 
-DB:
-  DataSource: user_service_1:h9u4u56dfojk@tcp(172.16.164.15:3306)/word?charset=utf8&parseTime=true&loc=Local
+PackageMemorizingDB:
+  # DataSources can be a map of explicit datasource names to DSNs. Use keys like
+  # db_000, db_001 to make mapping explicit. When a key for a shard is missing,
+  # the service will fall back to a stable selection strategy.
+  DataSources:
+    db_000: "user_service_1:h9u4u56dfojk@tcp(172.16.164.15:3306)/word?charset=utf8&parseTime=true&loc=Local"
+
+  # Number of physical databases (shards)
+  DBCount: 1
+
+  # Number of tables per physical database
+  TablesPerDB: 1

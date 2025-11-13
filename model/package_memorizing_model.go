@@ -1,6 +1,10 @@
 package model
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"fmt"
+
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ PackageMemorizingModel = (*customPackageMemorizingModel)(nil)
 
@@ -22,6 +26,24 @@ func NewPackageMemorizingModel(conn sqlx.SqlConn) PackageMemorizingModel {
 	return &customPackageMemorizingModel{
 		defaultPackageMemorizingModel: newPackageMemorizingModel(conn),
 	}
+}
+
+// NewPackageMemorizingModelWithTable returns a model bound to a specific table name.
+// table should be the logical table name without backticks, e.g. "package_memorizing_0".
+func NewPackageMemorizingModelWithTable(conn sqlx.SqlConn, table string) PackageMemorizingModel {
+	m := newPackageMemorizingModel(conn)
+	if table == "" {
+		m.table = "`package_memorizing`"
+	} else {
+		m.table = fmt.Sprintf("`%s`", table)
+	}
+	return &customPackageMemorizingModel{defaultPackageMemorizingModel: m}
+}
+
+// NewPackageMemorizingModelWithTableSuffix returns a model bound to a specific table name constructed from a suffix.
+func NewPackageMemorizingModelWithTableSuffix(conn sqlx.SqlConn, tableSuffix string) PackageMemorizingModel {
+	tableName := fmt.Sprintf("package_memorizing_%s", tableSuffix)
+	return NewPackageMemorizingModelWithTable(conn, tableName)
 }
 
 func (m *customPackageMemorizingModel) withSession(session sqlx.Session) PackageMemorizingModel {
