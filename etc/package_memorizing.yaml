@@ -1,0 +1,12 @@
+Name: package_memorizing
+Host: 0.0.0.0
+Port: 10006
+
+Log:
+  ServiceName: package_memorizing
+  Mode: file
+  Level: debug
+
+
+DB:
+  DataSource: user_service_1:h9u4u56dfojk@tcp(172.16.164.15:3306)/word?charset=utf8&parseTime=true&loc=Local

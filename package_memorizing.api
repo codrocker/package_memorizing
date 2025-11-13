@@ -1,0 +1,26 @@
+type (
+	Atom {
+		UID int64  `form:"uid,required"`
+		Sid string `form:"sid,required"`
+	}
+	Package {
+		ID                  int64  `json:"id"`
+		Title               string `json:"title"`
+		Type                int64  `json:"type"`
+		WordCount           int64  `json:"word_count"`
+		Learners            int64  `json:"learners"`
+		RememberedWordCount int64  `json:"remembered_word_count"`
+		CategoryCode        int64  `json:"category_code"`
+	}
+	CommenceRequest {
+		Atom
+		PackageID int64 `json:"package_id"`
+	}
+	CommenceResponse  {}
+)
+
+service package_memorizing {
+	@handler CommenceHandler
+	post /word/package_memorizing/commence (CommenceRequest) returns (CommenceResponse)
+}
+

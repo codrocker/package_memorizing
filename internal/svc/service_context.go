@@ -1,0 +1,15 @@
+package svc
+
+import (
+	"package_memorizing/internal/config"
+)
+
+type ServiceContext struct {
+	Config config.Config
+}
+
+func NewServiceContext(c config.Config) *ServiceContext {
+	return &ServiceContext{
+		Config: c,
+	}
+}
