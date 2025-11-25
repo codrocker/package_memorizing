@@ -7,6 +7,8 @@ Log:
   Mode: file
   Level: debug
 
+DB:
+  DataSource: user_service_1:h9u4u56dfojk@tcp(120.27.242.42:3306)/word?charset=utf8&parseTime=true&loc=Local
 
 PackageMemorizingDB:
   # DataSources can be a map of explicit datasource names to DSNs. Use keys like
@@ -20,3 +22,4 @@ PackageMemorizingDB:
 
   # Number of tables per physical database
   TablesPerDB: 1
+
